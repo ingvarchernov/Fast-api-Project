@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Create User</title>
+</head>
+<body>
+
+    <h1>Create User</h1>
+    <form id="create-user-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Create User</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('create-user-form');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+
+            // Відправляємо POST-запит на сервер для створення користувача
+            axios.post('model/user.py', { name })
+                .then(function(response) {
+                    // Оновлюємо сторінку або виконуємо інші дії після створення користувача
+                    window.location.href = 'model/user.py';
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        });
+    });
+</script>
+</body>
+</html>
